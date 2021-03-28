@@ -1,4 +1,7 @@
-%this function outputs the n-1 state matrices for n oscillators
+%this function takes 2 arguments, n the number of oscillators and their
+%fixed gain gamma.
+%this function outputs the n-1 state matrices for n oscillators.
+%ex: oscillators(3,0.2).
 function A=oscillators(n,gamma)
 phi=pi/6;
 R=1.02*[cos(phi) -sin(phi);sin(phi) cos(phi)];

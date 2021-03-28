@@ -3,6 +3,11 @@
 %this requires a Matlab toolbox for solving optimization problems: Yalmip (https://yalmip.github.io/),
 %this requires an semidefinite programming solver: SeDuMi (https://github.com/SQLP/SeDuMi).
 %% In the first part we give the design figure introduced in the example
+%remark 1: the simulation may pause multiple times with "Press any key to
+%proceed", to override this, comment out a "pause" in the JSR toolbox:
+%JSR_louvain/Methods/jsr.m line 357.
+%remark 2: the simulation may take a long time, however the results are saved
+%in gamma_result.m with the plots.
 clear all;
 C = {'r','b','g'}; %define colors used in the figure
 for n=3:1:5 %for 3,4 and 5 oscillators
@@ -30,8 +35,6 @@ ylim([0 0.6]);
 hold on;
 end
 legend([a(1),a(2),a(3)],'3 oscillators','4 oscillators','5 oscillators');
-%remark: the simulation may take a long time, however the results are saved
-%in gamma_result.m with the plots.
 
 %% In the second part we give 2 simulations for the example
 N=500; %number of steps

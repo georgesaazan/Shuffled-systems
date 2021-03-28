@@ -1,5 +1,8 @@
-%This outputs \kappa^{\theta}(t) for a shuffled switched signal according
+%This function takes 2 arguments: a row vector (the switching signal)
+%consisting of integers between 1 and n and an integer n (number of modes).
+%This function outputs \kappa^{\theta}(t) for a shuffled switched signal according
 %to Definition 2.1.
+%ex: kappa([1 2 1 1],2)
 function ka =kappa(A,n)
 ka=[];
 k=0;
