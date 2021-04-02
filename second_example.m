@@ -1,7 +1,8 @@
 %this provides the results of the second example of the paper,
 %this requires the JSR toolbox (https://www.mathworks.com/matlabcentral/fileexchange/33202-the-jsr-toolbox),
 %this requires a Matlab toolbox for solving optimization problems: Yalmip (https://yalmip.github.io/),
-%this requires an semidefinite programming solver: SeDuMi (https://github.com/SQLP/SeDuMi).
+%this requires an semidefinite programming solver: SeDuMi(https://github.com/SQLP/SeDuMi),
+%this requires the Econometrics Toolbox in Matlab.(https://fr.mathworks.com/products/econometrics.html)
 %% In the first part we give the design figure introduced in the example
 %remark 1: the simulation may pause multiple times with "Press any key to
 %proceed", to override this, comment out a "pause" in the JSR toolbox:
@@ -38,23 +39,17 @@ legend([a(1),a(2),a(3)],'3 oscillators','4 oscillators','5 oscillators');
 
 %% In the second part we give 2 simulations for the example
 N=500; %number of steps
-x=[-1.5;-0.5;2;-1]; %initial state
 o=oscillators(3,0.4); 
 F1=o{1};
 F2=o{2};
+for p12=[1/10,1/70]
+x=[-1.5;-0.5;2;-1]; %initial state
 traj=x; %traj=[x11 x12;x21 x22]
-for p12=[1/10,1/70];
 p21=p12; %probability of going from state 1 to state 2 and vice versa
 P=[1-p12,p12;p21,1-p21];
 mc=dtmc(P); %define Markov chain with transition matrix P
-sigma(1:N)=simulate(mc,N-1); %generate N random variables from Marov chain
-q=1/p12;j=q; %q is the maximal number of same values in a row
-while(j<length(sigma)) %this forces a random variable to change its value after q same values
-  if(sigma(j)*ones(1,q-1)==sigma(j-q+1:j-1))
-       sigma(j)=3-sigma(j);j=j+q; 
-       else j=j+1;
-  end
-end
+sigma(1:N)=simulate(mc,N-1); %generate N random variables from Markov chain
+q=1/p12;
 ka=kappa(sigma,2); %this counts the number of shuffles using kappa.m (Definition 2.1)
 for i=1:N
     if sigma(i)==1
