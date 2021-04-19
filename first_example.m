@@ -59,24 +59,16 @@ end
 resultl1 = resultl1(resultl1~=5);
 resultl2 = resultl2(resultl2~=5);
 resultl=[resultl1;resultl2];
-
-for i=1:1:2
 figure();
-plot(rho0:pas:rho1,resultl(i,:)) %upper bounds on lambda_i(\mathcal A,\rho)
+plot(rho0:pas:rho1,resultl(1,:),'-.','color','b') %upper bounds on lambda_i(\mathcal A,\rho)
+hold on;
+plot(rho0:pas:rho1,resultl(2,:),'color','b')
+hold on;
 xlim([rho0,rho1]);
-ylim([0 1]);
 hold on
-plot(rho0:pas:rho1,a(1)./(rho0:pas:rho1).^2) %lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5.2
+plot(rho0:pas:rho1,a(1)./(rho0:pas:rho1).^2,'--','color','r') %lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5.2
+ylim([0.4 1]);
 xlim([rho0,rho1]);
 xlabel('\rho')
-ylabel('\lambda')
-ylim([0 1]);
-legend('upper bounds','lower bounds')
-title('variation of \lambda(\rho)')
-end
-
-
-
-
-
-
+ylabel('\lambda(A,\rho)')
+legend('upper bound (Theorem 5.7)','upper bound (Theorem 5.8)','lower bound (Proposition 5.2)')
