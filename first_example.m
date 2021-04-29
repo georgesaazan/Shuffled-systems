@@ -50,7 +50,8 @@ lambda_1=0; %initiate \lambda(\mathcal A,\rho) for 1st Lyapunov method
 lambda_2=0; %initiate \lambda(\mathcal A,\rho) for 2nd Lyapunov method
 resultl1=[5]; %initiate the vector values of lambda_1
 resultl2=[5]; %initiate the vector values of lambda_2, the 5 will be removed later.
-for rho=rho0:pas:rho1 %interval of \rho
+t=rho0:pas:rho1;
+for rho=t %interval of \rho
 lambda_1=bounds_lambda_1({A1,A2},rho,10^-4); %find upper bounds using 1st Lyapunov method (bounds_lambda_1.m)
 lambda_2=bounds_lambda_2({A1,A2},rho,10^-4); %find upper bounds using 2nd Lyapunov method (bounds_lambda_2.m)
 resultl1=[resultl1,min(lambda_1,((rho-pas)/rho)^2*resultl1(end))];%\lambda is the minimum of the one obtained from the LMIs and the one from the inequality (4)
@@ -58,17 +59,26 @@ resultl2=[resultl2,min(lambda_2,((rho-pas)/rho)^2*resultl2(end))];%\lambda is th
 end
 resultl1 = resultl1(resultl1~=5);
 resultl2 = resultl2(resultl2~=5);
-resultl=[resultl1;resultl2];
+y1=zeros(length(t)-1,1); %upper bounds using Theorem 5.7
+y2=zeros(length(t)-1,1); %upper bounds using Theorem 5.8
+y1(1)=resultl1(1); 
+y2(1)=resultl2(1); 
+for i=1:1:length(t)-2
+y1(i+1)=min(y1(i),t(i+1)^2*resultl1(i+1));
+y2(i+1)=min(y2(i),t(i+1)^2*resultl2(i+1)); %applying Equation (5) written in the example: min...
+end
+syms z
+y=piecewise(z>=1 &z<1.05,y1(1)/z^2,z>=1.05 &z<1.1, y1(2)/z^2,z>=1.1 &z<1.15,y1(3)/z^2 , z>=1.15 &z<1.2, y1(4)/z^2, z>=1.2 &z<1.25,y1(5)/z^2 , z>=1.25 &z<1.3,y1(6)/z^2 , z>=1.3 &z<1.35,y1(7)/z^2);
 figure();
-plot(rho0:pas:rho1,resultl(1,:),'-.','color','b') %upper bounds on lambda_i(\mathcal A,\rho)
+fplot(y,'-.','color','b')%upper bounds on lambda_i(\mathcal A,\rho) using 1st method
 hold on;
-plot(rho0:pas:rho1,resultl(2,:),'color','b')
+y=piecewise(z>=1 &z<1.05,y2(1)/z^2,z>=1.05 &z<1.1, y2(2)/z^2,z>=1.1 &z<1.15,y2(3)/z^2 , z>=1.15 &z<1.2, y2(4)/z^2, z>=1.2 &z<1.25,y2(5)/z^2 , z>=1.25 &z<1.3,y2(6)/z^2 , z>=1.3 &z<1.35,y2(7)/z^2);
+fplot(y,'color','b')%upper bounds on lambda_i(\mathcal A,\rho) using 2nd method
 hold on;
-xlim([rho0,rho1]);
-hold on
-plot(rho0:pas:rho1,a(1)./(rho0:pas:rho1).^2,'--','color','r') %lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5.2
-ylim([0.4 1]);
-xlim([rho0,rho1]);
+y=a(1)/z^2;
+fplot(y,'--','color','r')%lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5.2
+xlim([rho0,rho1])
+ylim([0.4,1])
 xlabel('\rho')
 ylabel('\lambda(A,\rho)')
 legend('upper bound (Theorem 5.7)','upper bound (Theorem 5.8)','lower bound (Proposition 5.2)')

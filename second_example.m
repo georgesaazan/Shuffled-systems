@@ -49,7 +49,6 @@ p21=p12; %probability of going from state 1 to state 2 and vice versa
 P=[1-p12,p12;p21,1-p21];
 mc=dtmc(P); %define Markov chain with transition matrix P
 sigma(1:N)=simulate(mc,N-1); %generate N random variables from Markov chain
-q=1/p12;
 ka=kappa(sigma,2); %this counts the number of shuffles using kappa.m (Definition 2.1)
 for i=1:N
     if sigma(i)==1
@@ -85,5 +84,3 @@ axis([0 N 0.9 2.1])
 xlabel('t')
 ylabel('\theta(t)')
 end
-
-
