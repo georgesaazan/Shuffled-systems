@@ -11,7 +11,7 @@
 %in gamma_result.m with the plots.
 clear all;
 C = {'r','b','g'}; %define colors used in the figure
-for n=3:1:5 %for 3,4 and 5 oscillators
+n=3:1:3; %for 3,4 and 5 oscillators
 resultx=[]; %initialize the result every iteration on the number of oscillators
 for gamma=0:0.01:0.9 %we change the oscillators gain \gamma from 0 to 0.9
     if(gamma<=0.8) %we verify that for \gamma<=0.8 the jsr is 1.02 for all n
@@ -23,7 +23,7 @@ rho=t.bounds(1); %if \gamma>0.8 we calculate the jsr using the jsr toolbox
 b=bounds_lambda_2(oscillators(n,gamma),rho,10^-4) %upper bounds on \lambda 
 x=-log(rho)/log(b); %we verify numerically that the infimum is reached at the JSR when x<1/(n-1)
 if(x<1/(n-1)&&b~=1)
-else x=1/(n-1); %we verify that when x>=1/(n-1) the infimum is 1/(n-1).
+%%else x=1/(n-1); %we verify that when x>=1/(n-1) the infimum is 1/(n-1).
 end 
 resultx=[resultx ,x];
 end
@@ -34,7 +34,7 @@ ylabel("Inf -log(\rho)/log(\lambda)");
 title("stabilizability vs k");
 ylim([0 0.6]);
 hold on;
-end
+
 legend([a(1),a(2),a(3)],'3 oscillators','4 oscillators','5 oscillators');
 
 %% In the second part we give 2 simulations for the example
