@@ -1,5 +1,5 @@
 %this function takes 2 arguments: a set of matrices (ceil) and a scalar,
-%this function checks if the norm * exists for the Theorem 5.6 (2) and if it exists it outputs the corresponding Q by solving the LMIs else it gives the empty set.
+%this function checks if the norm * exists for the Theorem 2 (iii) and if it exists it outputs the corresponding Q by solving the LMIs else it gives the empty set.
 %this requires a Matlab toolbox for solving optimization problems: Yalmip (https://yalmip.github.io/),
 %this requires an semidefinite programming solver: SeDuMi (https://github.com/SQLP/SeDuMi).
 %ex: R_norm({2*eye(2),ones(2,2)},1).
