@@ -59,8 +59,8 @@ resultl2=[resultl2,min(lambda_2,((rho-pas)/rho)^2*resultl2(end))];%\lambda is th
 end
 resultl1 = resultl1(resultl1~=5);
 resultl2 = resultl2(resultl2~=5);
-y1=zeros(length(t)-1,1); %upper bounds using Theorem 5.7
-y2=zeros(length(t)-1,1); %upper bounds using Theorem 5.8
+y1=zeros(length(t)-1,1); %upper bounds using Theorem 3
+y2=zeros(length(t)-1,1); %upper bounds using Theorem 4
 y1(1)=resultl1(1); 
 y2(1)=resultl2(1); 
 for i=1:1:length(t)-2
@@ -76,9 +76,9 @@ y=piecewise(z>=1 &z<1.05,y2(1)/z^2,z>=1.05 &z<1.1, y2(2)/z^2,z>=1.1 &z<1.15,y2(3
 fplot(y,'color','b')%upper bounds on lambda_i(\mathcal A,\rho) using 2nd method
 hold on;
 y=a(1)/z^2;
-fplot(y,'--','color','r')%lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5.2
+fplot(y,'--','color','r')%lower bounds on lambda_i(\mathcal A,\rho) from Proposition 5
 xlim([rho0,rho1])
 ylim([0.4,1])
 xlabel('\rho')
 ylabel('\lambda(A,\rho)')
-legend('upper bound (Theorem 5.7)','upper bound (Theorem 5.8)','lower bound (Proposition 5.2)')
+legend('upper bound (Theorem 3)','upper bound (Theorem 4)','lower bound (Proposition 5)')
