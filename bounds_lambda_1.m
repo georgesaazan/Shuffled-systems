@@ -1,4 +1,4 @@
-%this function outputs bounds on the upper bounds of lambda(rho) using the 1st Lyapunov method (Theorem 5.7),
+%this function outputs bounds on the upper bounds of lambda(rho) using the 1st Lyapunov method (Theorem 3),
 %it takes the following arguments respectively: a set of matrices (ceil), rho, the fixed error for the dichotomy.
 %ex: bounds_lambda_1({eye(2),ones(2,2)},1,10^-3).
 %this requires a Matlab toolbox for solving optimization problems: Yalmip (https://yalmip.github.io/),
