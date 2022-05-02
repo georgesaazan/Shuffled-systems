@@ -54,8 +54,8 @@ t=rho0:pas:rho1;
 for rho=t %interval of \rho
 lambda_1=bounds_lambda_1({A1,A2},rho,10^-4); %find upper bounds using 1st Lyapunov method (bounds_lambda_1.m)
 lambda_2=bounds_lambda_2({A1,A2},rho,10^-4); %find upper bounds using 2nd Lyapunov method (bounds_lambda_2.m)
-resultl1=[resultl1,min(lambda_1,((rho-pas)/rho)^2*resultl1(end))];%\lambda is the minimum of the one obtained from the LMIs and the one from the inequality (4)
-resultl2=[resultl2,min(lambda_2,((rho-pas)/rho)^2*resultl2(end))];%\lambda is the minimum of the one obtained from the LMIs and the one from the inequality (4)
+resultl1=[resultl1,min(lambda_1,((rho-pas)/rho)^2*resultl1(end))];%\lambda is the minimum of the one obtained from the LMIs and the one from the inequality (5)
+resultl2=[resultl2,min(lambda_2,((rho-pas)/rho)^2*resultl2(end))];%\lambda is the minimum of the one obtained from the LMIs and the one from the inequality (5)
 end
 resultl1 = resultl1(resultl1~=5);
 resultl2 = resultl2(resultl2~=5);
